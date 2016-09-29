@@ -6,7 +6,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
-class DataScrapApp(unittest.TestCase):
+class DataScrapeApp(unittest.TestCase):
 
     def setUp(self):
         self.driver = webdriver.Chrome("/Users/Fahad/Downloads/chromedriver")
@@ -23,9 +23,9 @@ class DataScrapApp(unittest.TestCase):
         self.assertEquals("Canada", input_element.get_attribute('value'))
         input_element.send_keys(Keys.RETURN)
         payMonthlyButton = WebDriverWait(driver,1).until(EC.element_to_be_clickable((By.ID, "paymonthly")))
+        self.assertIn("Pay Monthly", payMonthlyButton.text)
         payMonthlyButton.click()
         callCost = WebDriverWait(driver, 1).until(EC.element_to_be_clickable((By.XPATH, """//*[@id="standardRatesTable"]/tbody/tr[1]/td[2]""")))
-        
         self.assertEquals("£1.50", callCost.text.encode('utf-8'))
         
     def tearDown(self):

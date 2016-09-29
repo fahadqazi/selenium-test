@@ -31,6 +31,6 @@ for country in countries:
     except Exception as e:
         print e
         
-    print country + " ", callCost.text
+    print country + " ", callCost.text.encode('utf-8')
     driver.refresh()
 
