@@ -14,18 +14,23 @@ countries = ["Canada","Germany", "Iceland","Pakistan", "Singapore", "South Afric
 
 for country in countries:    
     input_element = driver.find_element_by_id("countryName")
-    
     input_element.clear()
     input_element.send_keys(country)
     input_element.text
     input_element.send_keys(Keys.RETURN)
+
     try:
-        element1 = WebDriverWait(driver,1).until(EC.element_to_be_clickable((By.ID, "paymonthly")))
+        payMonthlyButton = WebDriverWait(driver,1).until(EC.element_to_be_clickable((By.ID, "paymonthly")))
     except Exception as e:
-        print "Findin paymonthly button. Exception %S" %e
+        print e
         
-    element1.click()
-    cost = WebDriverWait(driver, 1).until(EC.element_to_be_clickable((By.XPATH, """//*[@id="standardRatesTable"]/tbody/tr[1]/td[2]""")))
-    print country + " ", cost.text
+    payMonthlyButton.click()
+
+    try:
+        callCost = WebDriverWait(driver, 1).until(EC.element_to_be_clickable((By.XPATH, """//*[@id="standardRatesTable"]/tbody/tr[1]/td[2]""")))
+    except Exception as e:
+        print e
+        
+    print country + " ", callCost.text
     driver.refresh()
 
