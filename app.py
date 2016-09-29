@@ -14,6 +14,7 @@ countries = ["Canada","Germany", "Iceland","Pakistan", "Singapore", "South Afric
 
 for country in countries:    
     input_element = driver.find_element_by_id("countryName")
+    print "input element  ", input_element
     input_element.clear()
     input_element.send_keys(country)
     input_element.text
