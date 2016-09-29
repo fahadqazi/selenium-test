@@ -14,12 +14,16 @@ countries = ["Canada","Germany", "Iceland","Pakistan", "Singapore", "South Afric
 
 for country in countries:    
     input_element = driver.find_element_by_id("countryName")
-    print "input element  ", input_element
+    
     input_element.clear()
     input_element.send_keys(country)
     input_element.text
     input_element.send_keys(Keys.RETURN)
-    element1 = WebDriverWait(driver,1).until(EC.element_to_be_clickable((By.ID, "paymonthly")))
+    try:
+        element1 = WebDriverWait(driver,1).until(EC.element_to_be_clickable((By.ID, "paymonthly")))
+    except Exception as e:
+        print "Findin paymonthly button. Exception %S" %e
+        
     element1.click()
     cost = WebDriverWait(driver, 1).until(EC.element_to_be_clickable((By.XPATH, """//*[@id="standardRatesTable"]/tbody/tr[1]/td[2]""")))
     print country + " ", cost.text
